@@ -59,7 +59,7 @@ public class DriverManager {
 
                         }
                     }
-                    case "false" -> logger.info("*********TESTS BEING RUN LOCALLY IN CHROME BROWSER*********");
+                    case "false" -> logger.info("*********TESTS BEING RUN LOCALLY USING CHROME BROWSER*********");
                 }
                 driver = new ChromeDriver(chromeOptions);
                 driver.manage().window().maximize();
