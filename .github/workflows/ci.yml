@@ -1,4 +1,4 @@
-name: Spring Boot CI Workflow
+name: ORANGE HRM CI Workflow
 
 on:
   push:

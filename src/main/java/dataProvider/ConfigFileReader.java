@@ -11,7 +11,7 @@ import java.util.Properties;
 public class ConfigFileReader {
     private Properties properties;
     private String root = System.getProperty("user.dir");
-    private final String propertyFilePath = root + "\\config\\configuration.properties";
+    private final String propertyFilePath = root + "/config/configuration.properties";
 
     public ConfigFileReader() {
         BufferedReader reader;
