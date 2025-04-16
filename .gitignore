@@ -8,6 +8,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/workspace.xml
 *.iws
 *.iml
 *.ipr
@@ -122,6 +123,3 @@ yarn-debug.log*
 yarn-error.log*
 
 .allure/
-
-.idea/workspace.xml
-
