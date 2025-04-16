@@ -30,6 +30,10 @@ public class ConfigFileReader {
         }
     }
 
+    public String runTestMode() {
+        return properties.getProperty("runTest");
+    }
+
     public long getImplicitlyWait() {
         String implicitlyWait = properties.getProperty("implicitlyWait");
         if (implicitlyWait != null) return Long.parseLong(implicitlyWait);
@@ -58,5 +62,17 @@ public class ConfigFileReader {
         String windowSize = properties.getProperty("windowMaximize");
         if (windowSize != null) return Boolean.valueOf(windowSize);
         return true;
+    }
+
+    public String getUserName() {
+        return properties.getProperty("username");
+    }
+
+    public String getAccessKey() {
+        return properties.getProperty("accessKey");
+    }
+
+    public String getGridURL() {
+        return properties.getProperty("gridURL");
     }
 }

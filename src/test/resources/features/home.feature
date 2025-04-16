@@ -1,11 +1,10 @@
-#@BeforeAll
 @testAll
-Feature: User opens About us page
+Feature: User opens pages on OrangeHRM website
 
-
-  Scenario Outline: User on the expected page
+  Scenario Outline: User is on the expected page
     Given they are on "<page>"
     Then the "<page>" will be correct
+
     Examples:
       | page               |
       | home-page          |
