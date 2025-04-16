@@ -30,9 +30,14 @@ public class ConfigFileReader {
         }
     }
 
-    public String runTestMode() {
+    public String runTests() {
         return properties.getProperty("runTest");
     }
+
+    public String runTestMode() {
+        return properties.getProperty("headLessMode");
+    }
+
 
     public long getImplicitlyWait() {
         String implicitlyWait = properties.getProperty("implicitlyWait");

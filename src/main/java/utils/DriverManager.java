@@ -1,8 +1,6 @@
 package utils;
 
 import dataProvider.ConfigFileReader;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.commons.logging.Log;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -19,7 +17,7 @@ public class DriverManager {
 
     public WebDriver getDriver() {
         if (driver == null) {
-            if (configFileReader.runTestMode().equalsIgnoreCase("remote")) {
+            if (configFileReader.runTests().equalsIgnoreCase("remote")) {
                 initializeRemoteDriver();
             } else {
                 initializeLocalDriver();
@@ -29,7 +27,7 @@ public class DriverManager {
     }
 
     private void initializeRemoteDriver() {
-    logger.info("*********TESTS BEING RUN REMOTELY*********");
+        logger.info("*********TESTS BEING RUN REMOTELY*********");
         try {
             driver = LambdaTest.setCapability();
             driver.get(configFileReader.getApplicationUrl());
@@ -39,10 +37,13 @@ public class DriverManager {
     }
 
     private void initializeLocalDriver() {
-        logger.info("*********TESTS BEING RUN LOCALLY*********");
-       // WebDriverManager.chromedriver().setup();
+        // WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
+        if (configFileReader.runTestMode().equalsIgnoreCase("true")) {
+            logger.info("*********TESTS BEING RUN IN GITHUB ACTION*********");
+            chromeOptions.addArguments("--headless");
+        }
+        logger.info("*********TESTS BEING RUN LOCALLY*********");
         driver = new ChromeDriver(chromeOptions);
         driver.manage().window().maximize();
         driver.get(getString("homePage.url"));
