@@ -21,7 +21,7 @@ public class DriverManager {
 
     public WebDriver getDriver() {
         if (driver == null) {
-            if (configFileReader.runTests().equalsIgnoreCase("remote")) {
+            if (configFileReader.lambdaTest().equalsIgnoreCase("on")) {
                 initializeRemoteDriver();
             } else {
                 initializeLocalDriver();

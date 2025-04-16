@@ -55,6 +55,10 @@ public class ConfigFileReader {
         return properties.getProperty("browser");
     }
 
+    public String lambdaTest() {
+        return properties.getProperty("lambdaTest");
+    }
+
     public EnvironmentType getEnvironment() {
         String environmentName = properties.getProperty("environment");
         if (environmentName == null || environmentName.equalsIgnoreCase("local")) return EnvironmentType.LOCAL;
