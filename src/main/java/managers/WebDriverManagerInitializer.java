@@ -8,31 +8,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import page.HomePage;
 
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class WebDriverManagerInitializer{
-
+public class WebDriverManagerInitializer {
 
 
     private static WebDriver driver;
-    private static DriverTypes  driverType;
+    private static DriverTypes driverType;
     private static EnvironmentType environmentType;
     private static final String CHROME_DRIVER_PROPERTY = "webdriver.chrome.driver";
     private static final String EDGE_DRIVER_PROPERTY = "webdriver.edge.driver";
 
 
     public WebDriverManagerInitializer() {
-       WebDriverManager.chromedriver().setup();
-      driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(FileReaderManager.getInstance().getConfigReader().getApplicationUrl());
     }
 
     public WebDriver getDriver(String browser) {
-        if(driver == null) driver = createLocalDriver(browser);
+        if (driver == null) driver = createLocalDriver(browser);
         return driver;
     }
 
