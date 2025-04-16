@@ -31,7 +31,7 @@ public class DriverManager {
     }
 
     private void initializeRemoteDriver() {
-        logger.info("*********TESTS BEING RUN REMOTELY*********");
+        logger.info("*********TESTS BEING RUN REMOTELY IN LAMBDA TEST*********");
         try {
             driver = LambdaTest.setCapability();
             driver.get(configFileReader.getApplicationUrl());
@@ -45,33 +45,66 @@ public class DriverManager {
         switch (configFileReader.browserType()) {
             case "chrome" -> {
                 ChromeOptions chromeOptions = new ChromeOptions();
-                if (configFileReader.runTestMode().equalsIgnoreCase("true")) {
-                    logger.info("*********TESTS BEING RUN IN GITHUB ACTION*********");
-                    chromeOptions.addArguments("--headless");
+                switch (configFileReader.runTestMode()) {
+                    case "true" -> {
+                        switch (configFileReader.runTests()) {
+                            case "remote" -> {
+                                logger.info("*********TESTS BEING RUN IN GITHUB ACTION USING CHROME BROWSER*********");
+                                chromeOptions.addArguments("--headless");
+                            }
+                            case "local" -> {
+                                logger.info("*********TESTS BEING RUN LOCALLY IN CHROME IN HEADLESS MODE*********");
+                                chromeOptions.addArguments("--headless");
+                            }
+
+                        }
+                    }
+                    case "false" -> logger.info("*********TESTS BEING RUN LOCALLY IN CHROME BROWSER*********");
                 }
-                logger.info("*********TESTS BEING RUN LOCALLY*********");
                 driver = new ChromeDriver(chromeOptions);
                 driver.manage().window().maximize();
                 driver.get(getString("homePage.url"));
             }
             case "edge" -> {
                 EdgeOptions edgeOptions = new EdgeOptions();
-                if (configFileReader.runTestMode().equalsIgnoreCase("true")) {
-                    logger.info("*********TESTS BEING RUN IN GITHUB ACTION*********");
-                    edgeOptions.addArguments("--headless");
+                switch (configFileReader.runTestMode()) {
+                    case "true" -> {
+                        switch (configFileReader.runTests()) {
+                            case "remote" -> {
+                                logger.info("*********TESTS BEING RUN IN GITHUB ACTION USING EDGE BROWSER*********");
+                                edgeOptions.addArguments("--headless");
+                            }
+                            case "local" -> {
+                                logger.info("*********TESTS BEING RUN LOCALLY IN HEADLESS MODE USING EDGE BROWSER*********");
+                                edgeOptions.addArguments("--headless");
+                            }
+
+                        }
+                    }
+                    case "false" -> logger.info("*********TESTS BEING RUN LOCALLY USING EDGE BROWSER*********");
                 }
-                logger.info("*********TESTS BEING RUN LOCALLY*********");
                 driver = new EdgeDriver(edgeOptions);
                 driver.manage().window().maximize();
                 driver.get(getString("homePage.url"));
             }
             case "firefox" -> {
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-                if (configFileReader.runTestMode().equalsIgnoreCase("true")) {
-                    logger.info("*********TESTS BEING RUN IN GITHUB ACTION*********");
-                    firefoxOptions.addArguments("--headless");
+                switch (configFileReader.runTestMode()) {
+                    case "true" -> {
+                        switch (configFileReader.runTests()) {
+                            case "remote" -> {
+                                logger.info("*********TESTS BEING RUN IN GITHUB ACTION USING FIREFOX BROWSER*********");
+                                firefoxOptions.addArguments("--headless");
+                            }
+                            case "local" -> {
+                                logger.info("*********TESTS BEING RUN LOCALLY IN HEADLESS MODE USING FIREFOX BROWSER*********");
+                                firefoxOptions.addArguments("--headless");
+                            }
+
+                        }
+                    }
+                    case "false" -> logger.info("*********TESTS BEING RUN LOCALLY USING FIREFOX BROWSER*********");
                 }
-                logger.info("*********TESTS BEING RUN LOCALLY*********");
                 driver = new FirefoxDriver(firefoxOptions);
                 driver.manage().window().maximize();
                 driver.get(getString("homePage.url"));
